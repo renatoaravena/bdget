@@ -17,23 +17,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Paso 1.5: carga secretos en el application.properties
-      - name: Update db url
-        run: |
-         db_url_escaped=$(printf '%s\n' "${{ secrets.DB_URL }}" | sed 's/[&/\]/\\&/g')
-         sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
-        shell: bash
-      - name: Update db username 
-        run: |
-         db_username_escaped=$(printf '%s\n' "${{ secrets.DB_USERNAME }}" | sed 's/[&/\]/\\&/g')
-         sed -i "s|<db_username>|$db_username_escaped|" src/main/resources/application.properties
-        shell: bash
-      - name: Update db password 
-        run: |
-         db_password_escaped=$(printf '%s\n' "${{ secrets.DB_PASSWORD }}" | sed 's/[&/\]/\\&/g')
-         sed -i "s|<db_password>|$db_password_escaped|" src/main/resources/application.properties
-        shell: bash
-
       # Paso 2: Autenticar en DockerHub 
       - name: Log in to DockerHub
         uses: docker/login-action@v2 
