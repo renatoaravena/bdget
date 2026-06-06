@@ -12,7 +12,7 @@ ENV TNS_ADMIN=/app/wallet
 
 RUN mvn clean package
 
-FROM eclipse-temurin:21-jdk 
+FROM eclipse-temurin:22-jdk 
 
 COPY --from=buildstage /app/target/bdget-0.0.1-SNAPSHOT.jar /app/bdget.jar
 
